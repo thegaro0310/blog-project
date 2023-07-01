@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Post</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .post {
+            margin-bottom: 0px;
+            padding: 20px;
+            background-color: #f0e8e8;
+            border-radius: 10px;
+            white-space: pre-line; /* Preserve line breaks */
+        }
+
+        .post h2 {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+
+        .post .meta-data {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-style: italic;
+            margin-top: 30px;
+        }
+
+        .post a {
+            text-decoration: none;
+            color: #4CAF50;
+        }
+
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <a href="/">Back to Main Page</a>
+    <h1>Blog Post</h1>
+    <div class="post">
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.content }}</p>
+        <div class="meta-data">
+            <p>Author: {{ post.author }}</p>
+            <p>{{ post.date.strftime('%B %d, %Y') }}</p>
+            <p>Views: {{ post.views }}</p>
+        </div>
+    </div>
+</body>
+</html>
