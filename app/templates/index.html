@@ -9,7 +9,11 @@
 <body>
     <div class="fixed-top">
         <h1>Khoi's Blog</h1>
-        <a href="/add_post">Add New Post</a>
+        <form class="search-form" method="GET" action="{{ url_for('search_results.search_results') }}">
+            <input type="text" name="query" placeholder="Search..." size="60">
+            <button type="submit">Search</button>
+          </form>
+        <a href="{{ url_for('blog.add_post') }}">Add New Post</a>
     </div>
     <div class="content">
         {% if message %}
@@ -17,7 +21,7 @@
         {% else %}
             {% for post in posts %}
             <div class="post">
-                <h2><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h2>
+                <h2><a href="{{ url_for('blog.post', post_id=post.id) }}">{{ post.title }}</a></h2>
                 <p>{{ post.content[:200] }}{{ '...' if post.content|length > 200 }}</p>
                 <div class="meta-data">
                     <p>Author: {{ post.author }}</p>
@@ -26,8 +30,8 @@
                     <div class="dropdown">
                         <button class="dropbtn">...</button>
                         <div class="dropdown-content">
-                            <a href="{{ url_for('post', post_id=post.id) }}">Read More</a>
-                            <a href="{{ url_for('edit_post', post_id=post.id) }}">Edit</a>
+                            <a href="{{ url_for('blog.post', post_id=post.id) }}">Read More</a>
+                            <a href="{{ url_for('blog.edit_post', post_id=post.id) }}">Edit</a>
                         </div>
                     </div>  
                 </div>  
@@ -35,6 +39,7 @@
             {% endfor %}
         {% endif %}    
     </div>
+    <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
 
 </html>
