@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search_results_styles.css') }}">
+    <title>Search Results</title>
+</head>
+<body>
+    <div class="fixed-top">
+        <h1>Khoi's Blog - Search Results</h1>
+        <form class="search-form" method="GET" action="{{ url_for('search_results.search_results') }}">
+            <input type="text" name="query" placeholder="Search..." size="60" value="{{ search_query }}">
+            <button type="submit">Search</button>
+        </form>
+        <a href="{{ url_for('main.index') }}">Back to Home</a>
+    </div>
+    <div class="content">
+        <h2>Search Results for "{{ search_query }}"</h2>
+        {% if search_results %}
+            <ul>
+                {% for post in search_results %}
+                    <li>
+                        <h3><a href="{{ url_for('blog.post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                        <p>{{ post.content[:200] }}{{ '...' if post.content|length > 200 }}</p>
+                        <div class="meta-data">
+                            <p>Author: {{ post.author }}</p>
+                            <p>{{ post.date.strftime('%B %d, %Y') }}</p>
+                            <p>Views: {{ post.views }}</p>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No results found for "{{ search_query }}"</p>
+        {% endif %}
+    </div>
+</body>
+</html>
